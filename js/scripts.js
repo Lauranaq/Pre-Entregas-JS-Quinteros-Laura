@@ -1,124 +1,159 @@
-//Nombre y Apellido de usuario
-let nombreIngresado = prompt("Ingresa tu nombre");
-while ( nombreIngresado==="" || !isNaN(nombreIngresado)){
-    if (nombreIngresado === ""){
-        alert ("un texto vacio no es valido");
-    } else {
-        alert ("No se puede ingresar campos numerico");
+//Array de objetos con los tipos de prestamos 
+const prestamos = [
+    {
+        tipo: "Prestamo1 ",
+        motivo: "vehiculo",
+        monto: 500000    
+    },
+    {
+        tipo: "Prestamo2",
+        motivo: "Hogar",
+        monto: 300000             
+    },
+    {
+        tipo: "Prestamo3",
+        motivo: "vacaciones ",
+        monto: 200000    
+    },
+    {
+        tipo: "Prestamo4",
+        motivo: "Refiananciacion de Pasivos",
+        monto: 100000     
+    },
+    {
+        tipo: "Prestamo5",
+        motivo: "Otros",
+        monto: 50000      
     }
-     nombreIngresado = prompt ("Ingresa tu nombre");
+];
+// Array con cantidad de cuotas disponibles 
+const cuotas = [ 1, 2, 3, 4, 5, 6];
+
+//                                 Funciones 
+
+// Funcion Saludar al usuarios
+const saludar = ()=> {
+    alert("Hola, "+ nombreIngresado +". ¡Bienvenido/a!");
 }
-let apellidoIngresado = prompt("Ingresa tu apellido");
-while ( apellidoIngresado==="" || !isNaN(apellidoIngresado)){
-    if (apellidoIngresado === ""){
-        alert ("un texto vacio no es valido");
-    } else {
-        alert ("No se puede ingresar campos numericos");
-    }
-     apellidoIngresado = prompt ("Ingresa tu apellido");
-}
-//Saludo de bienvenida al ususario
-alert("Hola, "+ nombreIngresado + " " + apellidoIngresado + ". ¡Bienvenido/a!");
-console.log(nombreIngresado +" "+ apellidoIngresado);
 
-//Solicitud de Correo electronico 
-let correo = prompt ("Por favor, ingresa tu correo electronico");
-console.log ("El correo electronico de " + nombreIngresado + " "+ apellidoIngresado +" es "+ correo);
-
-//Solicitud de edad del usuario
-let edad = parseInt(prompt ("Por favor, Ingresa tu edad"));
-
-while (edad=== ""|| isNaN(edad)){    
-        alert ("Debes ingresar tu edad para continuar");      
-        edad = parseInt(prompt ("Por favor, Ingresa tu edad en numeros"));
-}    
-console.log (edad +" "+ "anos");
-
-// Verificacion que el usuario sea mayor de 21 anos
-if (edad < 21) {
-    alert ("¡Lo sentimos " + nombreIngresado + "! No podemos ofrecerte nuestros servicios");
-} else {
-    alert ("¡Felicitaciones "+ nombreIngresado + "! Estas mas cerca de obtener tu prestamo" );
-
-//Motivo del prestamo 
+// Funcion Motivos del prestamo 
+function consultar(){
     let motivos; 
+    
     do {
-        motivos = parseInt(prompt("Por favor, selecciona el numero de la opcion: 1.Compra de un automóvil, vehículo. \
-            2.Reparaciones o mejoras en el hogar.\
-            3.Viaje o vacaciones.\
-            4.pago o refinanciamiento de pasivos.\
-            5.Otros"));
-        } while (isNaN(motivos));
+        motivos = parseInt(prompt("Por favor, selecciona el motivo del prestamo:\
+        \n1.Compra de un automóvil, vehículo. \
+        \n2.Reparaciones o mejoras en el hogar.\
+        \n3.Viaje o vacaciones.\
+        \n4.pago o refinanciamiento de pasivos.\
+        \n5.Otros"));
+        } while (isNaN(motivos) || motivos < 1 || motivos > 5 || motivos === "");
         
 
     switch (motivos) {
         case 1:
-            alert ("Dispones de hasta $500000 para la compra de tu vehiculo");
+            alert ("Podemos ofrecerte el Prestamo1 de $500.000 para la compra de tu vehiculo.");
             break;
         case 2:
-            alert ("Dispones de hasta $300000 para destinar a tu hogar");    
+            alert ("Podemos ofrecerte el Prestamo2 de $300.000 para destinar a tu hogar.");    
             break;
         case 3:
-            alert ("Dispones de hasta $200000 para tus vacaciones");
+            alert ("Podemos ofrecerte el Prestamo3 de $200.000 para tus vacaciones.");
             break;    
         case 4:
-            alert ("Dispones de hasta $100000 para pagar tus pasivos");
+            alert ("Podemos ofrecerte el Prestamo4 de $100.000 para pagar tus pasivos.");
             break;    
         case 5:
-            alert (" Dispones de $50000 para lo que decidas gastarlo ");
+            alert ("Podemos ofrecerte el Prestamo5 de $50.000 para lo que decidas gastarlo.");
             break;     
         default:
             alert ("Motivo no valido");           
         }  
-        //Monto del prestamo que desearia solicitar el usuario  
-        let montoPrestamo = parseInt(prompt("Ingresa el monto del prestamo que desea solicitar"));
-        while (montoPrestamo === ""|| isNaN (montoPrestamo)){
-            alert ("Debes ingresar el monto que desea solicitar en numeros");
-            montoPrestamo = parseInt(prompt("Ingresa el monto del prestamo que desea solicitar"));
-        }
-        //Consulta sobre cantidad de cuotas
-        let cuotas = parseInt(prompt("Ingresa la cantidad de cuotas que desea solicitar"));
-        while (cuotas === ""|| isNaN (cuotas)){
-            alert ("Debes ingresar el numero de cuotas que desea solicitar");
-            cuotas = parseInt(prompt("Ingresa el numero de cuotas que desea solicitar"));
-        }
-        //Calculo del importe de la cuota
-        let tasaInteres = 0.06;
-        let interesTotal = montoPrestamo * tasaInteres;
-        let montoCuota = (montoPrestamo + interesTotal) / cuotas;
-        alert ("el valor de tu cuota va a ser de "+ montoCuota);
-
-
-        // Establezco una funcion recopilando datos para despedir al usuario
-        function despedir() {
-            alert("Nuestro equipo de asesores se estara comunicado con vos "+ nombreIngresado+ " " + apellidoIngresado+ " a la brevedad.");
-            let verificacion = prompt ("¿Tu correo electronico es "+ correo + " ? "+" (responde por si o por no)");
-            let respuesta1 = "si";
-            let respuesta2 = "no";
-
-            while (verificacion === ""|| !isNaN(verificacion)|| verificacion.toLowerCase() == respuesta2){
-                if (verificacion === ""|| !isNaN(verificacion)){
-                alert ("Por favor, Ingresa una respuesta valida");
-                } else{
-                alert ("Ingresa, nuevamente, tu correo electronico y nos contactaremos a la brevedad. Gracias");
-                }
-                verificacion = prompt ("Ingresa tu correo electronico");
-            }
-            if (verificacion.toLowerCase () == respuesta1){
-                 alert (" Gracias, nos estaremos comunicando a la brevedad.")
-            }
-        }        
-        //Despedida del usuario
-        despedir();
 }
- 
+
+
+//Funcion para obtener el monto del prestamo elegido
+function montoDePrestamo (tipoSeleccionado) {
+  return prestamos.find (prestamo=> prestamo.tipo === tipoSeleccionado)?.monto;
+}
+
+
+//Funcion para calcular el valor de la cuota 
+function calcularValorCuota (monto, cuotasSeleccionadas){
+    return (monto/cuotasSeleccionadas)*1.6;
+}
+
+//Funcion despedir al Usuario
+ function despedir (){
+    alert ("Nuestro equipo de asesores se estara comunicado con vos "+ nombreIngresado);
+    let correo = prompt ("Ingresa tu correo electronico");
+    while (correo=== ""){
+        alert ("Debes completar este campo");
+        correo = prompt ("Ingresa tu correo electronico, por favor");
+    }
+    alert ("¡Gracias por visitar nuestro sitio!");
+ }
 
 
 
-    
+//MENU PRINCIPAL
+
+// Nombre de Usuario 
+let nombreIngresado = prompt ("Ingrese su nombre");
+while (nombreIngresado === "" || !isNaN(nombreIngresado)){
+    if (nombreIngresado === ""){
+        alert("Un texto vacio no es valido");
+    }else {
+        alert ("No se puede ingresar campos numericos");
+    }
+    nombreIngresado = prompt(" Ingrese su nombre, por favor");
+}
+console.log (nombreIngresado);
+
+// Saludo de binvenida al Usuario
+saludar ();
 
 
+// Edad del Usuario
+let edad = parseInt (prompt ("Ingrese su edad"));
+while (edad === "" || isNaN(edad)){
+        alert ("Debe ingresar su edad para continuar");      
+        edad = parseInt(prompt ("Por favor, Ingrese su edad en numeros"));
+}   
+console.log(edad +" "+ "anos");
 
+// Verifico que el usuario sea mayor de 21 años
+if (edad < 21){
+    alert ("¡Lo sentimos "+ nombreIngresado + "! No podemos ofrecerle nuestros servicios");
+} else{
+    alert ("¡Felicitaciones "+ nombreIngresado + "! Estas mas cerca de obtener tu prestamo" );
 
+// Consulto el motivo del prestamo
+consultar();
 
+// Pedir al usuario que elija el tipo de préstamo
+let tipoSeleccionado = prompt("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros).");
+while (tipoSeleccionado === ""|| isNaN(tipoSeleccionado) || tipoSeleccionado < 1 || tipoSeleccionado > 5){
+    alert ("Ingrese el numero correspondiente al prestamo que desea solicitar");
+    tipoSeleccionado = parseInt(prompt ("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros)."));
+}
 
+// Pedir al usuario que elija la cantidad de cuotas
+let cuotasSeleccionadas = prompt("Por favor, elija la cantidad de cuotas:\n" + cuotas.join('\n'));
+while (cuotasSeleccionadas=== " "|| isNaN (cuotasSeleccionadas) || cuotasSeleccionadas < 1 || cuotasSeleccionadas > 6){
+    alert ("Debe ingresar un numero de cuotas valido");
+    cuotasSeleccionadas = parseInt(prompt("Por favor, ingrese el numero de cuotas"));
+};
+
+// Obtener el monto del préstamo seleccionado por el usuario
+const montoPrestamo = montoDePrestamo(prestamos[parseInt(tipoSeleccionado) - 1].tipo);
+
+// Calcular el valor de la cuota
+const valorCuota = calcularValorCuota(montoPrestamo, parseInt(cuotasSeleccionadas));
+
+// Mostrar el resultado al usuario
+alert("El valor de cada cuota será de: $" + valorCuota.toFixed(2));
+
+// Despedida del Usuario
+despedir();
+}
