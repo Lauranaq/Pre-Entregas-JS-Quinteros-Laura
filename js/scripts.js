@@ -32,8 +32,8 @@ const cuotas = [ 1, 2, 3, 4, 5, 6];
 //                                 Funciones 
 
 // Funcion Saludar al usuarios
-const saludar = ()=> {
-    alert("Hola, "+ nombreIngresado +". ¡Bienvenido/a!");
+const saludar = (persona)=> {
+    alert("Hola, "+ persona +". ¡Bienvenido/a!");
 }
 
 // Funcion Motivos del prestamo 
@@ -84,76 +84,80 @@ function calcularValorCuota (monto, cuotasSeleccionadas){
 }
 
 //Funcion despedir al Usuario
- function despedir (){
-    alert ("Nuestro equipo de asesores se estara comunicado con vos "+ nombreIngresado);
+ function despedir (final){
+    alert ("Nuestro equipo de asesores se estara comunicado con vos "+ final);
     let correo = prompt ("Ingresa tu correo electronico");
     while (correo=== ""){
         alert ("Debes completar este campo");
         correo = prompt ("Ingresa tu correo electronico, por favor");
     }
-    alert ("¡Gracias por visitar nuestro sitio!");
+    alert ("¡Gracias,"+" "+ final + " por visitar nuestro sitio!");
  }
 
 
 
-//MENU PRINCIPAL
-
-// Nombre de Usuario 
-let nombreIngresado = prompt ("Ingrese su nombre");
-while (nombreIngresado === "" || !isNaN(nombreIngresado)){
-    if (nombreIngresado === ""){
-        alert("Un texto vacio no es valido");
-    }else {
-        alert ("No se puede ingresar campos numericos");
+//FUNCION PRINCIPAL
+function ejecutarProceso() {
+    //NOMBRE DE USUARIO
+    let nombreIngresado = prompt ("Ingrese su nombre");
+    while (nombreIngresado === "" || !isNaN(nombreIngresado)){
+        if (nombreIngresado === ""){
+            alert("Un texto vacio no es valido");
+        }else {
+            alert ("No se puede ingresar campos numericos");
+        }
+        nombreIngresado = prompt(" Ingrese su nombre, por favor");
     }
-    nombreIngresado = prompt(" Ingrese su nombre, por favor");
+    console.log (nombreIngresado);
+    
+    // Saludo de binvenida al Usuario
+    saludar (nombreIngresado);
+    
+    
+    // Edad del Usuario
+    let edad = parseInt (prompt ("Ingrese su edad"));
+    while (edad === "" || isNaN(edad)){
+            alert ("Debe ingresar su edad para continuar");      
+            edad = parseInt(prompt ("Por favor, Ingrese su edad en numeros"));
+    }   
+    console.log(edad +" "+ "anos");
+    
+    // Verifico que el usuario sea mayor de 21 años
+    if (edad < 21){
+        alert ("¡Lo sentimos "+ nombreIngresado + "! No podemos ofrecerle nuestros servicios");
+    } else{
+        alert ("¡Felicitaciones "+ nombreIngresado + "! Estas mas cerca de obtener tu prestamo" );
+    
+    // Consulto el motivo del prestamo
+    consultar();
+    
+    // Pedir al usuario que elija el tipo de préstamo
+    let tipoSeleccionado = prompt("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros).");
+    while (tipoSeleccionado === ""|| isNaN(tipoSeleccionado) || tipoSeleccionado < 1 || tipoSeleccionado > 5){
+        alert ("Ingrese el numero correspondiente al prestamo que desea solicitar");
+        tipoSeleccionado = parseInt(prompt ("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros)."));
+    }
+    
+    // Pedir al usuario que elija la cantidad de cuotas
+    let cuotasSeleccionadas = prompt("Por favor, elija la cantidad de cuotas:\n" + cuotas.join('\n'));
+    while (cuotasSeleccionadas=== " "|| isNaN (cuotasSeleccionadas) || cuotasSeleccionadas < 1 || cuotasSeleccionadas > 6){
+        alert ("Debe ingresar un numero de cuotas valido");
+        cuotasSeleccionadas = parseInt(prompt("Por favor, ingrese el numero de cuotas"));
+    };
+    
+    // Obtener el monto del préstamo seleccionado por el usuario
+    const montoPrestamo = montoDePrestamo(prestamos[parseInt(tipoSeleccionado) - 1].tipo);
+    
+    // Calcular el valor de la cuota
+    const valorCuota = calcularValorCuota(montoPrestamo, parseInt(cuotasSeleccionadas));
+    
+    // Mostrar el resultado al usuario
+    alert("El valor de cada cuota será de: $" + valorCuota.toFixed(2));
+    
+    // Despedida del Usuario
+    despedir(nombreIngresado);
+    }
+
 }
-console.log (nombreIngresado);
-
-// Saludo de binvenida al Usuario
-saludar ();
-
-
-// Edad del Usuario
-let edad = parseInt (prompt ("Ingrese su edad"));
-while (edad === "" || isNaN(edad)){
-        alert ("Debe ingresar su edad para continuar");      
-        edad = parseInt(prompt ("Por favor, Ingrese su edad en numeros"));
-}   
-console.log(edad +" "+ "anos");
-
-// Verifico que el usuario sea mayor de 21 años
-if (edad < 21){
-    alert ("¡Lo sentimos "+ nombreIngresado + "! No podemos ofrecerle nuestros servicios");
-} else{
-    alert ("¡Felicitaciones "+ nombreIngresado + "! Estas mas cerca de obtener tu prestamo" );
-
-// Consulto el motivo del prestamo
-consultar();
-
-// Pedir al usuario que elija el tipo de préstamo
-let tipoSeleccionado = prompt("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros).");
-while (tipoSeleccionado === ""|| isNaN(tipoSeleccionado) || tipoSeleccionado < 1 || tipoSeleccionado > 5){
-    alert ("Ingrese el numero correspondiente al prestamo que desea solicitar");
-    tipoSeleccionado = parseInt(prompt ("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros)."));
-}
-
-// Pedir al usuario que elija la cantidad de cuotas
-let cuotasSeleccionadas = prompt("Por favor, elija la cantidad de cuotas:\n" + cuotas.join('\n'));
-while (cuotasSeleccionadas=== " "|| isNaN (cuotasSeleccionadas) || cuotasSeleccionadas < 1 || cuotasSeleccionadas > 6){
-    alert ("Debe ingresar un numero de cuotas valido");
-    cuotasSeleccionadas = parseInt(prompt("Por favor, ingrese el numero de cuotas"));
-};
-
-// Obtener el monto del préstamo seleccionado por el usuario
-const montoPrestamo = montoDePrestamo(prestamos[parseInt(tipoSeleccionado) - 1].tipo);
-
-// Calcular el valor de la cuota
-const valorCuota = calcularValorCuota(montoPrestamo, parseInt(cuotasSeleccionadas));
-
-// Mostrar el resultado al usuario
-alert("El valor de cada cuota será de: $" + valorCuota.toFixed(2));
-
-// Despedida del Usuario
-despedir();
-}
+//llamo a la funcion ejecutar proceso
+ejecutarProceso ();

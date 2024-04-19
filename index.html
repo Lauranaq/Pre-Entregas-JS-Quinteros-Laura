@@ -22,7 +22,51 @@
             </nav>
         </header>
         <main>
-          <img src="./imagenes/hero2.jpg" alt="">
+            <h1>Formulario de solicitud de prestamo</h1>
+            <form>
+                <label for="nombre">Ingrese su nombre</label><br>
+                <input id="nombre type="text" placeholder="Escribe tu nombre">
+                <br><br>
+
+                <label for="edad">Ingrese su edad</label><br>
+                <input id="edad" type="text" placeholder="Escribe tu edad">
+                <br><br>
+
+                <label for="motivo">Seleccione el motivo del Prestamo</label><br>
+                <select name="motivo" id="motivo">
+                    <option value="compra">Compra de Automovil, vehiculo</option>
+                    <option value="reparaciones">Reparaciones o mejoras en el hogar</option>
+                    <option value="viaje">Viaje o vacaciones</option>
+                    <option value="pago">Pago o refinanciamiento de pasivos</option>
+                    <option value="otros">otros</option>                 
+                </select> <br><br>
+                
+                <label for="tipo">Seleccione el tipo de prestamo</label><br>
+                <select name="tipo" id="tipo">
+                    <option value="primerp">Prestamo 1 (Automovil) $500000</option>
+                    <option value="segundo">Prestamo 2 (Hogar) $300000</option>
+                    <option value="tercero">Prestamo 3 (Vacaciones) $200000</option>
+                    <option value="cuarto">Prestamo 4 (Pasivos) $100000</option>
+                    <option value="quinto">Prestamo 5 (otros) $50000</option>                 
+                </select> <br> <br>
+
+                <label for="cuotas">Seleccione la catidad de cuotas</label><br>
+                <select name="cuotas" id="cuotas">
+                    <option value="una">1</option>
+                    <option value="dos">2</option>
+                    <option value="tres">3</option>
+                    <option value="cuatro">4</option>
+                    <option value="cinco">5</option>
+                    <option value="seis">6</option>
+                </select> <br><br>
+
+                <button type="submit">Enviar Informacion</button>
+            </form>   
+        <form>
+            <label for="mail">Ingrese su Mail</label><br><br>
+            <input id="mail" type="text" placeholder="Escribe tu mail"><br><br>
+            <button type="submit">Enviar</button><br><br>
+        </form>        
         </main>
         <footer>
            <p>©copyright 2024 FinanciaCor. Todos los derechos reservados</p>
