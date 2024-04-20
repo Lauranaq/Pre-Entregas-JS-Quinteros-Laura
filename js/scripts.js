@@ -26,138 +26,128 @@ const prestamos = [
         monto: 50000      
     }
 ];
+
 // Array con cantidad de cuotas disponibles 
 const cuotas = [ 1, 2, 3, 4, 5, 6];
 
-//                                 Funciones 
 
-// Funcion Saludar al usuarios
-const saludar = (persona)=> {
-    alert("Hola, "+ persona +". ¡Bienvenido/a!");
+//Local Storage
+
+// Guardo mi Objeto Prestamo en el Local Storage
+let prestamosJSON = JSON.stringify(prestamos);
+localStorage.setItem( "prestamos", prestamosJSON);
+
+console.log(prestamosJSON);
+
+// Guardo mi Objeto Cuotas en el Local Storage
+let cuotasJSON = JSON.stringify (cuotas);
+localStorage.setItem ("cuotas", cuotasJSON);
+
+console.log(cuotasJSON);
+
+//JSON Prestamos convertido en objeto
+let prestamosObjeto = JSON.parse(prestamosJSON);
+console.log(prestamosObjeto);
+
+//JSON Cuotas convertido en Objeto 
+let cuotasObjeto = JSON.parse (cuotasJSON);
+console.log(cuotasObjeto);
+
+
+
+//Local Storage Modo Color 
+const body = document.body;
+
+let modoColorLS = localStorage.getItem ("modo-color");
+if (modoColorLS === ("modo-oscuro")){
+    body.classList.add("modo-oscuro")
 }
 
-// Funcion Motivos del prestamo 
-function consultar(){
-    let motivos; 
-    
-    do {
-        motivos = parseInt(prompt("Por favor, selecciona el motivo del prestamo:\
-        \n1.Compra de un automóvil, vehículo. \
-        \n2.Reparaciones o mejoras en el hogar.\
-        \n3.Viaje o vacaciones.\
-        \n4.pago o refinanciamiento de pasivos.\
-        \n5.Otros"));
-        } while (isNaN(motivos) || motivos < 1 || motivos > 5 || motivos === "");
-        
-
-    switch (motivos) {
-        case 1:
-            alert ("Podemos ofrecerte el Prestamo1 de $500.000 para la compra de tu vehiculo.");
-            break;
-        case 2:
-            alert ("Podemos ofrecerte el Prestamo2 de $300.000 para destinar a tu hogar.");    
-            break;
-        case 3:
-            alert ("Podemos ofrecerte el Prestamo3 de $200.000 para tus vacaciones.");
-            break;    
-        case 4:
-            alert ("Podemos ofrecerte el Prestamo4 de $100.000 para pagar tus pasivos.");
-            break;    
-        case 5:
-            alert ("Podemos ofrecerte el Prestamo5 de $50.000 para lo que decidas gastarlo.");
-            break;     
-        default:
-            alert ("Motivo no valido");           
-        }  
-}
-
-
-//Funcion para obtener el monto del prestamo elegido
-function montoDePrestamo (tipoSeleccionado) {
-  return prestamos.find (prestamo=> prestamo.tipo === tipoSeleccionado)?.monto;
-}
-
-
-//Funcion para calcular el valor de la cuota 
-function calcularValorCuota (monto, cuotasSeleccionadas){
-    return (monto/cuotasSeleccionadas)*1.6;
-}
-
-//Funcion despedir al Usuario
- function despedir (final){
-    alert ("Nuestro equipo de asesores se estara comunicado con vos "+ final);
-    let correo = prompt ("Ingresa tu correo electronico");
-    while (correo=== ""){
-        alert ("Debes completar este campo");
-        correo = prompt ("Ingresa tu correo electronico, por favor");
+const btnModoColor = document.querySelector("#modo-color");
+ 
+btnModoColor.addEventListener("click", () => {
+    body.classList.toggle("modo-oscuro");
+    if (body.classList.contains("modo-oscuro")){
+        localStorage.setItem("modo-color", "modo-oscuro");
+    }else{
+        localStorage.removeItem ("modo-color");
     }
-    alert ("¡Gracias,"+" "+ final + " por visitar nuestro sitio!");
- }
+}) 
+
+//Funcion para calcular el valor de la cuota
+function calcularValorCuota(montoPrestamo, cuotasSeleccionadas) {
+    const tasaInteres = 1.15; 
+    const valorCuota = (montoPrestamo * tasaInteres) / cuotasSeleccionadas;
+    return valorCuota;
+}
 
 
-
+ 
 //FUNCION PRINCIPAL
 function ejecutarProceso() {
-    //NOMBRE DE USUARIO
-    let nombreIngresado = prompt ("Ingrese su nombre");
-    while (nombreIngresado === "" || !isNaN(nombreIngresado)){
-        if (nombreIngresado === ""){
-            alert("Un texto vacio no es valido");
-        }else {
-            alert ("No se puede ingresar campos numericos");
-        }
-        nombreIngresado = prompt(" Ingrese su nombre, por favor");
-    }
-    console.log (nombreIngresado);
-    
-    // Saludo de binvenida al Usuario
-    saludar (nombreIngresado);
-    
-    
-    // Edad del Usuario
-    let edad = parseInt (prompt ("Ingrese su edad"));
-    while (edad === "" || isNaN(edad)){
-            alert ("Debe ingresar su edad para continuar");      
-            edad = parseInt(prompt ("Por favor, Ingrese su edad en numeros"));
-    }   
-    console.log(edad +" "+ "anos");
-    
-    // Verifico que el usuario sea mayor de 21 años
-    if (edad < 21){
-        alert ("¡Lo sentimos "+ nombreIngresado + "! No podemos ofrecerle nuestros servicios");
-    } else{
-        alert ("¡Felicitaciones "+ nombreIngresado + "! Estas mas cerca de obtener tu prestamo" );
-    
-    // Consulto el motivo del prestamo
-    consultar();
-    
-    // Pedir al usuario que elija el tipo de préstamo
-    let tipoSeleccionado = prompt("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros).");
-    while (tipoSeleccionado === ""|| isNaN(tipoSeleccionado) || tipoSeleccionado < 1 || tipoSeleccionado > 5){
-        alert ("Ingrese el numero correspondiente al prestamo que desea solicitar");
-        tipoSeleccionado = parseInt(prompt ("Por favor, elija el tipo de préstamo:\n1. Prestamo1 (Vehiculo)\n2. Prestamo2 (Hogar)\n3. Prestamo3 (Vacaciones) \n4. Prestamo4 (Pasivos) \n5. Prestamo5 (Otros)."));
-    }
-    
-    // Pedir al usuario que elija la cantidad de cuotas
-    let cuotasSeleccionadas = prompt("Por favor, elija la cantidad de cuotas:\n" + cuotas.join('\n'));
-    while (cuotasSeleccionadas=== " "|| isNaN (cuotasSeleccionadas) || cuotasSeleccionadas < 1 || cuotasSeleccionadas > 6){
-        alert ("Debe ingresar un numero de cuotas valido");
-        cuotasSeleccionadas = parseInt(prompt("Por favor, ingrese el numero de cuotas"));
-    };
-    
-    // Obtener el monto del préstamo seleccionado por el usuario
-    const montoPrestamo = montoDePrestamo(prestamos[parseInt(tipoSeleccionado) - 1].tipo);
-    
-    // Calcular el valor de la cuota
-    const valorCuota = calcularValorCuota(montoPrestamo, parseInt(cuotasSeleccionadas));
-    
-    // Mostrar el resultado al usuario
-    alert("El valor de cada cuota será de: $" + valorCuota.toFixed(2));
-    
-    // Despedida del Usuario
-    despedir(nombreIngresado);
-    }
 
-}
+const form = document.getElementById("formulario"); 
+
+form.addEventListener('submit', function(e) {
+
+    e.preventDefault();
+
+    let nombrePedido = document.getElementById("nombre").value;
+    let edadPedida = document.getElementById("edad").value;
+    let motivoPedido = document.getElementById("motivo").value;
+    let tipoPedido = document.getElementById("tipo").value;
+    let cuotasPedidas= document.getElementById("cuotas").value;
+    let mailPedido= document.getElementById("mail").value;
+    console.log(nombrePedido)
+    console.log(edadPedida)
+    console.log(motivoPedido)
+    console.log(tipoPedido)
+    console.log(cuotasPedidas)
+    console.log(mailPedido)
+     
+
+
+//NOMBRE DE USUARIO
+const mensajeNombre = document.getElementById ("errorNombre");
+if (nombrePedido === "") {
+    mensajeNombre.innerText= "Un texto vacio no es valido";
+ }else if (!isNaN(nombrePedido)){
+    mensajeNombre.innerText= "No se pude ingresar campos numericos";
+ }else{
+    mensajeNombre.innerText= ("Bienvenido/a "+ nombrePedido);
+ };
+
+       
+// Edad del Usuario
+const mensajeEdad = document.getElementById ("errorEdad");
+
+if (edadPedida === "" || isNaN(edadPedida)){
+    mensajeEdad.innerText= "Debe ingresar su edad para continuar"
+}else if (edadPedida< 21){
+    mensajeEdad.innerText= ("¡Lo sentimos "+ nombrePedido + "! No podemos ofrecerle nuestros servicios");
+}else {
+    mensajeEdad.innerText= ("¡Felicitaciones "+ nombrePedido + "! Estas mas cerca de obtener tu prestamo" );
+    
+};
+ 
+ // Calcular el valor de la cuota
+ const valorCuota = calcularValorCuota(tipoPedido,cuotasPedidas);
+ console.log (valorCuota);
+
+ // Mostrar el resultado al usuario
+ const resultadoCuota = document.getElementById("resultado");
+ resultadoCuota.innerText = "El valor de cada cuota será de: $" + valorCuota.toFixed(2);
+
+    
+// Despedida del Usuario  
+ const mensajeMail = document.getElementById ("errorMail");
+
+ if (mailPedido.trim() === ""){
+    mensajeMail.innerText=("Por favor no dejar el campo vacio"+ nombrePedido);
+}else {
+    mensajeMail.innerText= ("Nuestro equipo de asesores se estara comunicando con vos "+ nombrePedido);
+} 
+}) }
+
 //llamo a la funcion ejecutar proceso
 ejecutarProceso ();

@@ -5,9 +5,11 @@
     font-family: 'Times New Roman', Times, serif;
     
   }
-  body {
-    background-image: linear-gradient(to bottom, rgb(48, 171, 243),rgb(155, 207, 240),rgb(116, 146, 170));
+  body.modo-oscuro{
+    background-color:rgb(89, 158, 214);
+    color:white;
   }
+  
   nav ul{
     backdrop-filter: blur(5px);
     width: 100%;
@@ -21,17 +23,19 @@
     padding:15px;
   }
   nav a{
-   text-decoration: none;
-   color: black;
+   text-decoration: none;   
    padding: 20px;
-   
+   color: black;
    font-size: 25px;
    font-weight: 10px;
    
   }
+  .blanco{
+    color: white;
+  }
+  
   header h1, h2 {
-    text-align: center;
-    color: black;
+    text-align: center;    
     padding: 15px;
     font-size: 40px;    
   }
@@ -54,9 +58,7 @@
     display: flex;
     justify-content: space-between;    
   }
-  footer p {
-    color: black;
-  }
+ 
   @media (min-width :376px) and ( max-width:768px){
     nav li{
       padding: 10px;

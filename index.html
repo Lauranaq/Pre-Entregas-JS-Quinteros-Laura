@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="./css/style.css">
         <title>FiananciaCor</title>
     </head>
-    <body>
+    <body class="modo-oscuro">        
         <header>
             <h1>FinanciaCor</h1>
-            <h2>Obtene tu prestamo al instante</h2>
+            <h2>Prestamos al instante</h2>
             <nav>
                 <ul>
                     <li><a href="">Inicio</a></li>
@@ -21,15 +21,18 @@
                 </ul>
             </nav>
         </header>
+        <button id="modo-color">Cambiar modo color</button>
         <main>
-            <h1>Formulario de solicitud de prestamo</h1>
-            <form>
+            <h1>Formulario</h1>
+            <form id="formulario">
                 <label for="nombre">Ingrese su nombre</label><br>
-                <input id="nombre type="text" placeholder="Escribe tu nombre">
+                <input id="nombre" type="text" placeholder="Escribe tu nombre">
+                <p id="errorNombre"></p>
                 <br><br>
-
+               
                 <label for="edad">Ingrese su edad</label><br>
                 <input id="edad" type="text" placeholder="Escribe tu edad">
+                <p id="errorEdad"></p>
                 <br><br>
 
                 <label for="motivo">Seleccione el motivo del Prestamo</label><br>
@@ -41,32 +44,34 @@
                     <option value="otros">otros</option>                 
                 </select> <br><br>
                 
-                <label for="tipo">Seleccione el tipo de prestamo</label><br>
+                <label for="tipo">Seleccione el monto del prestamo</label><br>
                 <select name="tipo" id="tipo">
-                    <option value="primerp">Prestamo 1 (Automovil) $500000</option>
-                    <option value="segundo">Prestamo 2 (Hogar) $300000</option>
-                    <option value="tercero">Prestamo 3 (Vacaciones) $200000</option>
-                    <option value="cuarto">Prestamo 4 (Pasivos) $100000</option>
-                    <option value="quinto">Prestamo 5 (otros) $50000</option>                 
+                    <option value="500000">Prestamo 1 (Automovil) $500000</option>
+                    <option value="300000">Prestamo 2 (Hogar) $300000</option>
+                    <option value="200000">Prestamo 3 (vijaes) $200000</option>
+                    <option value="100000">Prestamo 4 (Pago) $100000</option>
+                    <option value="50000">Prestamo 5 (Otros) $50000</option>                 
                 </select> <br> <br>
 
                 <label for="cuotas">Seleccione la catidad de cuotas</label><br>
                 <select name="cuotas" id="cuotas">
-                    <option value="una">1</option>
-                    <option value="dos">2</option>
-                    <option value="tres">3</option>
-                    <option value="cuatro">4</option>
-                    <option value="cinco">5</option>
-                    <option value="seis">6</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 </select> <br><br>
+                <p id="resultado"></p>
 
-                <button type="submit">Enviar Informacion</button>
+                <label for="mail">Ingrese su Mail</label>
+                <input id="mail"  type="text" placeholder="Escribe tu Mail">
+                <pi id="errorMail" ></p><br><br>
+
+                <button type="submit">Enviar Informacion</button>               
+
             </form>   
-        <form>
-            <label for="mail">Ingrese su Mail</label><br><br>
-            <input id="mail" type="text" placeholder="Escribe tu mail"><br><br>
-            <button type="submit">Enviar</button><br><br>
-        </form>        
+        
         </main>
         <footer>
            <p>©copyright 2024 FinanciaCor. Todos los derechos reservados</p>
