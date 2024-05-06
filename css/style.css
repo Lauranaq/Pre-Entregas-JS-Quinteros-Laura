@@ -1,102 +1,148 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
-    
-  }
-  body.modo-oscuro{
-    background-color:rgb(89, 158, 214);
-    color:white;
-  }
-  
-  nav ul{
-    backdrop-filter: blur(5px);
-    width: 100%;
-    padding-right: 30px;
-    list-style: none;
-    text-align: center;
-  }
-  nav li{
-    display: inline-flex;
-    margin-right: 10px;
-    padding:15px;
-  }
-  nav a{
-   text-decoration: none;   
-   padding: 20px;
-   color: black;
-   font-size: 25px;
-   font-weight: 10px;
-   
-  }
-  .blanco{
-    color: white;
-  }
-  
-  header h1, h2 {
-    text-align: center;    
-    padding: 15px;
-    font-size: 40px;    
-  }
-  header h2{
-    font-size:25px ;
-    padding: 20px;
-  }
-  main{
-    display: flex;
-    justify-content: center;
-    
-    
-  }
-  
-  footer {
-    width: 100%;
-    height: auto;
-    padding: 40px;   
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;    
-  }
- 
-  @media (min-width :376px) and ( max-width:768px){
-    nav li{
-      padding: 10px;
-      display: inline-block;
-      margin: 10px 20pxS;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+body.modo-oscuro{
+  background-color:#88b2e2;
+  color:white;
+}
 
-     
-    }
-    nav a{
-      padding: 10px;
-      width: 100px;
-      font-size: 15px;
-      margin-left: 15px;
-    }  
-    main img{
-        width: 100%;  
-        height:100% ;      
-        padding: 15px;  
-        margin-top: 70px;
-        margin-bottom: 20px;
-              
-      }
-      body{
-        width: 100%;
-        height: 100%;
-        margin: 60px 0px;
-      }
+:root {
+  --clr-black: #0d3766;
+  --clr-white: #fcf9f2;
+  --clr-accent: #2f97ec;
+}
 
-      footer {        
-        width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        
-        padding: 90px 20px;
-        
-        
-        font-size: 15px;
-        
-      }
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
 
-  }
+img {
+  
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.header {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  padding-block: 1rem;
+}
+
+.main {
+  padding-block: 2rem;
+}
+
+.titulo {
+  margin-bottom: 1rem;
+}
+#cuotaSeleccionada{
+  font-family: "Bricolage Grotesque", sans-serif;    
+  font-weight: bolder;
+  font-size: 25px;
+  padding-top: 10px;
+
+}
+.productos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.producto {
+  background-color: var(--clr-black);
+  padding: .5rem;
+  border-radius: 1rem;
+  color: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.producto-img {
+  border-radius: .75rem;
+}
+
+.producto-btn {
+  border-radius: .75rem;
+  border: 0;
+  background-color: var(--clr-accent);
+  color: var(--clr-white);
+  padding: .5rem;
+  margin-top: .5rem;
+  cursor: pointer;
+  border: 2px solid var(--clr-accent);
+  transition: .2s;
+}
+
+.producto-btn:hover {
+  background-color: var(--clr-white);
+  color: var(--clr-black);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.carrito-productos {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.carrito-producto {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--clr-black);
+  padding: .5rem 2rem;
+  border-radius: 1rem;
+  color: var(--clr-white);
+}
+
+.carrito-producto-btn {    
+  background-color: var(--clr-white);
+  border: 0;
+  padding: .25rem;
+  border-radius: .25rem;
+  cursor: pointer;
+}
+
+.d-none {
+  display: none;
+}
+#modo-color{
+  border-radius: .75rem;
+  border: 0;
+  background-color: var(--clr-accent);
+  color: var(--clr-white);
+  padding: .7rem;
+  margin-top: .5rem;
+  cursor: pointer;
+  border: 2px solid var(--clr-accent);
+  transition: .2s;
+
+}
+#modo-color:hover {
+  background-color: var(--clr-white);
+  color: var(--clr-black);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  padding: 20px;
+}
