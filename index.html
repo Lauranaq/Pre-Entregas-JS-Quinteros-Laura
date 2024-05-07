@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinanciaCor</title>
-    <link rel="shortcut icon" href="./img/favicon.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.jpg" type="image/x-icon">       
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="modo-oscuro">    
@@ -25,7 +25,7 @@
             <h2 class="titulo">Prestamo Elegido</h2>
             <div class="carrito">
                 <div id="carrito-vacio">
-                    <h4>Aun no elegiste tus prestamos</h4>
+                    <h4>No hay prestamo seleccionado</h4>
                 </div>
                 <div class="carrito-productos d-none" id="carrito-productos">
                     <!-- Se completa con JS -->
@@ -37,19 +37,40 @@
         </section>
         <section class="container">
             <h2 class="titulo">Elegi la cantidad de cotas</h2>
-            <div id="containerCuotas">
-                <!-- Se completa con JS -->                
+            <div id="containerCuotas">                
+                <!-- Se completa con JS -->                                   
             </div>
-            <p id="cuotaSeleccionada"></p>
-        </section>    
+            <p id="cuotaSeleccionada"></p> 
+        </section> 
+        <section class="container">
+            <h2>Complete el formulario de contacto</h2>
+            <div id="containerFormulario">
+                <form>                    
+                    <label class="formulario" for="nombre">Ingrese su nombre</label><br>
+                    <input id="nombre" type="text" placeholder="Escribe tu nombre">
+                    <br><br>
+                
+                    <label  class="formulario" for="edad">Ingrese su edad</label><br>
+                    <input id="edad" type="text" placeholder="Escribe tu edad"><br><br>
+
+                    <button id="botonEnviar" type="submit">Enviar</button>
+                    <br><br>
+
+                    <label class="formulario" for="mail">Ingrese su Mail</label><br><br>
+                    <input id="mail" type="text" placeholder="Escribe tu mail"><br><br>
+
+                    <button id="modo-color" type="submit">Enviar Solicitud</button><br><br>
+
+                </form>
+            </div>
+        </section>   
     </main>
   
 </body>
-    
     <footer class="footer">
         <p>©copyright 2024 FinanciaCor. Todos los derechos reservados</p>
         <p>Pagina realizada por Laura Quinteros</p>
-    </footer>
+    </footer>    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/main.js"></script>
 </body>
