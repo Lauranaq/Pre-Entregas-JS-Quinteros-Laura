@@ -29,7 +29,7 @@ const productos = [
     {
         nombre: "Prestamo para Refinanciacion de Pasivos",
         monto: 150000,
-        img: "./img/pasivos2.jpg",
+        img: "./img/pasivos.jpg",
         cantidad: 1,
     },
     {
@@ -44,19 +44,6 @@ const productos = [
 const cuotas = [1, 2,3,4,5,6];
 
 
-// Guardo mi Objeto Prestamo en el Local Storage
-let productosJSON = JSON.stringify(productos);
-localStorage.setItem( "productos", productosJSON);
-
-console.log(productosJSON);
-
-// Guardo mi Objeto Cuotas en el Local Storage
-let cuotasJSON = JSON.stringify (cuotas);
-localStorage.setItem ("cuotas", cuotasJSON);
-
-console.log(cuotasJSON);
-
-
 //Creo constantes para utilizar 
 const contenedorProductos = document.querySelector("#productos");
 const carritoVacio = document.querySelector("#carrito-vacio");
@@ -64,7 +51,7 @@ const carritoProductos = document.querySelector("#carrito-productos");
 const carritoTotal = document.querySelector("#carrito-total");
 
 
-// Recorro el array de prestamos 
+// Recorro el array de prestamos y lo muestro en la pagina
 productos.forEach((producto) => {
     const div = document.createElement("div");
     div.classList.add("producto");
@@ -119,7 +106,7 @@ function actualizarCarrito() {
     actualizarTotal();
 }
 
-// Recorro Array de Cuotas 
+// Recorro Array de Cuotas para mostrarlo en la pagina
 const container = document.getElementById('containerCuotas');
 const selectElement = document.createElement('select');
 selectElement.setAttribute('id', 'selectCuotas');
@@ -134,7 +121,7 @@ cuotas.forEach(cuota => {
 });
 container.appendChild(selectElement);
 
-//Funcion para calcular el valor de la cuota 
+//Funcion para calcular el valor de cada cuota 
 function calcularCuota(montoTotal, cuotaElegida) {
     let interesInicial = 0.05; 
     let incrementoInteres = 0.02; 
@@ -143,7 +130,7 @@ function calcularCuota(montoTotal, cuotaElegida) {
     return cuotaConInteres.toFixed(2);
 }
 
-// Función para mostrar las cuotas
+// Función para mostrar el valor de la cuota elegida
 const mostrarCuotas = () => {
     const cuotaSeleccionada = parseInt(document.getElementById('selectCuotas').value);
     const montoTotal = parseInt(carritoTotal.innerText.slice(1));
@@ -198,22 +185,12 @@ const actualizarTotal = () => {
 
 //FORMULARIO DE CONTACTO 
 // Verifico que el usuario sea mayor de 21 años
-const botonEnviar = document.getElementById("botonEnviar");
- 
-botonEnviar.addEventListener("click", function(event) {       
-    event.preventDefault();       
-    verificar();
-});
-
-
-
-
 const verificar = ()=>{
     const edad = parseInt(document.getElementById("edad").value);
     if (edad < 21) {
         Swal.fire({
             title: "Lo sentimos!",
-            text: "Por tu edad, no podemos ofrecerte nuestros servicios",
+            text: "No podemos ofrecerte nuestros servicios por ser menor de edad.",
             icon: "error"
           });          
     }else if ((edad === "" || isNaN(edad))){
@@ -226,13 +203,47 @@ const verificar = ()=>{
         }else {
             Swal.fire({
                 title: "Felicitaciones! Ya estas mas cerca de obtener tu prestamo",
-                text: "Completa tu mail en el siguiente casillero y un equipo de asesores se comunicara con vos",
+                text: "Un equipo de asesores se comunicara con usted a la brevedad.",
                 icon: "success"
-              }); 
+              });
+             // Obtengo datos que completo el usuario
+                const nombre = document.getElementById("nombre").value;
+                const mail = document.getElementById("mail").value;
+                const edad = document.getElementById("edad").value;
+                const cuotaSeleccionada = parseInt(document.getElementById('selectCuotas').value);
+        
+            // Creo objeto con datos recopilados
+            const data = {
+                nombre: nombre,
+                mail: mail,
+                edad: edad,
+                prestamos: carrito,
+                cuotas: cuotaSeleccionada
+            };
+            //Enviar datos a una API
+                const API_URL ="https://jsonplaceholder.typicode.com/posts";
+
+                fetch(API_URL,{
+                method:"POST",
+                body: JSON.stringify(data),
+                headers:{
+                    'Content-Type':'application/json; charset=UTF-8'
             }
-   
+                })
+                .then(res => res.json())
+                .then (data =>console.log (data))  
+            }   
 }; 
-  
+//Creo el evento Click  
+const botonEnviar = document.getElementById("botonEnviar");
+ 
+botonEnviar.addEventListener("click", function(event) {       
+    event.preventDefault();   
+
+
+ verificar();
+});
+
 
 
 
